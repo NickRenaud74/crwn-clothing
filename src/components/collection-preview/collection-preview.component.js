@@ -14,8 +14,8 @@ function CollectionPreview({ title, items }) {
             </h1>
             <div className='preview'>
                 {
-                    firstFourItems.map(({id, ...itemProps}) => (
-                        <CollectionItem key={id} {...itemProps} />
+                    firstFourItems.map(item => (
+                        <CollectionItem key={item.id} item={item} />
                     ))
                 }
             </div>
