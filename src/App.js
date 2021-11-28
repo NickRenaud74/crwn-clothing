@@ -5,13 +5,16 @@ import Homepage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckoutPage from './pages/checkout/checkout.component'
+
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { setCurrentUser } from './redux/user/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
+import {selectCurrentUser } from './redux/user/user.selectors'
 
 function App() {
-  const currentUser = useSelector(state => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,7 +36,7 @@ function App() {
     return () => {
       unsubscribeFromAuth();
     };
-  });
+  }, []);
 
   return (
     <div>
@@ -41,6 +44,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={ShopPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
         <Route exact path="/signin" 
           render={() => 
             currentUser ? <Redirect to='/'/> : <SignInAndSignUp /> 

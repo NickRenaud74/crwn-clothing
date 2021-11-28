@@ -7,9 +7,12 @@ import { useSelector } from 'react-redux'
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
+import { selectCartHidden } from '../../redux/cart/cart.selectors'
+import { selectCurrentUser } from '../../redux/user/user.selectors'
+
 function Header() {
-    const currentUser = useSelector(state => state.user.currentUser)
-    const cartHidden = useSelector(state => state.cart.hidden)
+    const currentUser = useSelector(selectCurrentUser)
+    const cartHidden = useSelector(selectCartHidden)
 
     return (
         <div className='header'>
