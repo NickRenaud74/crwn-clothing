@@ -10,7 +10,7 @@ function ShopPage() {
     },[]);
 
     return (
-        <div classname='shop-page'>
+        <div className='shop-page'>
             {
                 collections.map(({id, ...collectionProps}) => (
                     <CollectionPreview key={id} {...collectionProps} />
