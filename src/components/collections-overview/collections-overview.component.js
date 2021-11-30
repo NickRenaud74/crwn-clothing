@@ -3,12 +3,12 @@ import './collections-overview.styles.scss';
 import CollectionPreview from '../collection-preview/collection-preview.component'
 
 import { useSelector } from 'react-redux'
-import { selectCollections } from '../../redux/shop/shop.selector'
+import { selectCollectionsForPreview } from '../../redux/shop/shop.selector'
 
 
 function CollectionsOverview(){
     const [collections, setCollections] = useState([])
-    const shopData = useSelector(selectCollections)
+    const shopData = useSelector(selectCollectionsForPreview)
 
     useEffect(() => {
         setCollections(shopData);

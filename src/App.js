@@ -36,7 +36,7 @@ function App() {
     return () => {
       unsubscribeFromAuth();
     };
-  }, []);
+  }, [] );
 
   return (
     <div>
