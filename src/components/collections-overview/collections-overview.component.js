@@ -12,6 +12,7 @@ function CollectionsOverview(){
 
     useEffect(() => {
         setCollections(shopData);
+        // eslint-disable-next-line
     }, []);
 
     return (

@@ -36,6 +36,7 @@ function App() {
     return () => {
       unsubscribeFromAuth();
     };
+    // eslint-disable-next-line
   }, [] );
 
   return (
