@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import './collections-overview.styles.scss';
 import CollectionPreview from '../collection-preview/collection-preview.component'
 
 import { useSelector } from 'react-redux'
 import { selectCollectionsForPreview } from '../../redux/shop/shop.selector'
+import { CollectionsOverviewContainer } from './collections-overview.styles';
 
 
 function CollectionsOverview(){
@@ -16,13 +16,13 @@ function CollectionsOverview(){
     }, []);
 
     return (
-        <div className='collections-overview'>
+        <CollectionsOverviewContainer>
             {
                 collections.map(({id, ...collectionProps}) => (
                     <CollectionPreview key={id} {...collectionProps} />
                 ))         
             }
-        </div>
+        </CollectionsOverviewContainer>
     )
 };
 
