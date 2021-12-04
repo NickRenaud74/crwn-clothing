@@ -5,10 +5,14 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 import { SignUpContainer, SignUpTitle } from './sign-up.styles'
 
 function SignUp() {
-    const [displayName, setDisplayName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [userCredentials, setUserCredentials] = useState({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    })
+    
+    const { displayName, email, password, confirmPassword } = userCredentials;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,12 +24,13 @@ function SignUp() {
 
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-
             await createUserProfileDocument(user, { displayName });
-            setDisplayName('')
-            setEmail('')
-            setPassword('')
-            setConfirmPassword('');
+            setUserCredentials({
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            })
 
         } catch (error) {
             console.error(error)
@@ -34,22 +39,7 @@ function SignUp() {
 
     const handleChange = e => {
         const { name, value } = e.target;
-        switch (name) {
-            case 'displayName':
-                setDisplayName(value);
-                break;
-            case 'email':
-                setEmail(value);
-                break;
-            case 'password':
-                setPassword(value);
-                break;
-            case 'confirmPassword': 
-                setConfirmPassword(value);
-                break;
-            default:
-                break;
-        }
+        setUserCredentials({ ...userCredentials, [name]: value })
     }
 
     return (

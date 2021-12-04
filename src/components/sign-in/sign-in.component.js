@@ -5,17 +5,15 @@ import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 import { SignInContainer, ButtonsContainer, SignInTitle } from './sign-in.styles'
 
 function SignIn() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [userCredentials, setUserCredentials] = useState({ email: '', password: ''})
+
+    const { email, password } = userCredentials;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
         try {
             await auth.signInWithEmailAndPassword(email, password)
-            setEmail('');
-            setPassword('');
+            setUserCredentials({email: '', password: ''})
         } catch (error) {
             console.error(error)
         }
@@ -23,9 +21,7 @@ function SignIn() {
 
     const handleChange = e => {
         const { name, value } = e.target;
-
-        name === 'email' ? setEmail(value) : setPassword(value);
-
+        setUserCredentials({ ...userCredentials, [name]: value })
     }
 
     return (
