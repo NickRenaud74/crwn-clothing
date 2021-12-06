@@ -4,7 +4,7 @@ import CollectionsOverview from '../../components/collections-overview/collectio
 import CollectionPage from '../collection/collection.component'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selector'
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions'
 import WithSpinner from '../../components/with-spinner/with-spinner.component'
 
 
@@ -16,7 +16,7 @@ function ShopPage({ match }) {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(fetchCollectionsStartAsync());
+       dispatch(fetchCollectionsStart());
         // eslint-disable-next-line
     }, [])
 
