@@ -6,38 +6,18 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import CheckoutPage from './pages/checkout/checkout.component'
-
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
-import { setCurrentUser } from './redux/user/user.actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {selectCurrentUser } from './redux/user/user.selectors'
+import { checkUserSession } from "./redux/user/user.actions";
 
 function App() {
-  const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-  const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          dispatch(setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          }));
-        });
-
-      } else {
-        dispatch(setCurrentUser(null));
-      }
-    });
-    return () => {
-      unsubscribeFromAuth();
-    };
-    // eslint-disable-next-line
-  }, [] );
+    dispatch(checkUserSession())
+    //eslint-disable-next-line
+  }, [])
 
   return (
     <div>

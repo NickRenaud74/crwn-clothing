@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import { signUpStart } from '../../redux/user/user.actions';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 import { SignUpContainer, SignUpTitle } from './sign-up.styles'
 
 function SignUp() {
@@ -10,7 +11,9 @@ function SignUp() {
         email: '',
         password: '',
         confirmPassword: '',
-    })
+    });
+
+    const dispatch = useDispatch()
     
     const { displayName, email, password, confirmPassword } = userCredentials;
 
@@ -21,20 +24,7 @@ function SignUp() {
             alert('Passwords do not match!');
             return;
         }
-
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, { displayName });
-            setUserCredentials({
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-            })
-
-        } catch (error) {
-            console.error(error)
-        }
+        dispatch(signUpStart({ email, password, displayName }))
     }
 
     const handleChange = e => {
