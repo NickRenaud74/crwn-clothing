@@ -11,7 +11,6 @@ import CollectionItem from '../../components/collection-item/collection-item.com
 
 function CollectionPage({ match }) {
     const collection = useSelector(selectCollection(match.params.collectionId))
-    console.log(collection)
 
     const { title, items } = collection
 

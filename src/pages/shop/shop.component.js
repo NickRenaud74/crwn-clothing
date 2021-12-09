@@ -17,8 +17,7 @@ function ShopPage({ match }) {
     
     useEffect(() => {
        dispatch(fetchCollectionsStart());
-        // eslint-disable-next-line
-    }, [])
+    }, [dispatch])
 
     return (
         <div>
